@@ -33,7 +33,7 @@ export class SortingVisualizer extends React.Component {
 
     bubbleSort() { }
 
-    // Testing sorting algorithms
+    // Testing method for sorting algorithms
     testSortingAlgorithms() {
         for (let i = 0; i < 100; i++) {
             const array = [];
