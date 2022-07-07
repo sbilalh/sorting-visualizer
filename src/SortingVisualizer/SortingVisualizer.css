@@ -1,0 +1,11 @@
+.array-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.array-bar {
+    width: 2px;
+    background-color: turquoise;
+    margin: 0 1px;
+}
