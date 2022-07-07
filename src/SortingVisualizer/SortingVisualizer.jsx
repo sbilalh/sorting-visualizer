@@ -57,7 +57,7 @@ export class SortingVisualizer extends React.Component {
                 <button onClick={() => this.heapSort()}>Heap Sort</button>
                 <button onClick={() => this.quickSort()}>Quick Sort</button>
                 <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
-                <button onClick={() => this.testSortingAlgorithms()}>test</button>
+                <button onClick={() => this.testSortingAlgorithms()}>Test</button>
                 <div className="array-container">
                     {array.map((value, idx) => (
                         <div
