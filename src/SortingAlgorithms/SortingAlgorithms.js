@@ -58,3 +58,9 @@ function merge(arr, l, m, h, animations, temp) {
         k++;
     }
 }
+
+// TODO: Heap Sort
+
+// TODO: Quick Sort
+
+// TODO: Bubble Sort
