@@ -2,13 +2,17 @@ import React from 'react';
 import './SortingVisualizer.css';
 import { getMergeSortAnimations } from '../SortingAlgorithms/SortingAlgorithms.js';
 
-const ANIMATION_SPEED_MS = 5;
+const ANIMATION_SPEED_MS = 3;
 
 const NUMBER_OF_ARRAY_BARS = 310;
 
 const PRIMARY_COLOR = 'turquoise';
 
 const SECONDARY_COLOR = 'red';
+
+const TERTIARY_COLOR = 'chartreuse'
+
+const buffer = 1.04;
 
 export class SortingVisualizer extends React.Component {
     constructor(props) {
@@ -55,6 +59,18 @@ export class SortingVisualizer extends React.Component {
                 }, i * ANIMATION_SPEED_MS);
             }
         }
+        setTimeout(() => {
+            for (let i = 0; i < this.state.array.length; i++) {
+                const arrayBar = document.getElementsByClassName('array-bar');
+                arrayBar[i].style.backgroundColor = TERTIARY_COLOR;
+            }
+        }, animations.length * ANIMATION_SPEED_MS);
+        setTimeout(() => {
+            for (let i = 0; i < this.state.array.length; i++) {
+                const arrayBar = document.getElementsByClassName('array-bar');
+                arrayBar[i].style.backgroundColor = PRIMARY_COLOR;
+            }
+        }, buffer * animations.length * ANIMATION_SPEED_MS);
     }
 
     heapSort() { }
@@ -81,7 +97,7 @@ export class SortingVisualizer extends React.Component {
         const { array } = this.state;
 
         return (
-            <body>
+            <>
                 <button onClick={() => this.resetArray()}>Generate New Array</button>
                 <button onClick={() => this.mergeSort()}>Merge Sort</button>
                 <button onClick={() => this.heapSort()}>Heap Sort</button>
@@ -93,13 +109,13 @@ export class SortingVisualizer extends React.Component {
                         <div
                             className="array-bar"
                             key={idx}
-                            style={{ 
+                            style={{
                                 backgroundColor: PRIMARY_COLOR,
-                                height: `${value}px` 
+                                height: `${value}px`
                             }}></div>
                     ))}
                 </div>
-            </body>
+            </>
         );
     }
 }
