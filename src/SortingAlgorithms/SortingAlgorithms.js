@@ -1,51 +1,59 @@
+// MergeSort Animations
+export function getMergeSortAnimations(array) {
+    const animations = [];
+    let temp = array.slice();
+    if (array.length <= 1) {
+        return array;
+    }
+    mergeSort(array, 0, array.length - 1, animations, temp);
+    return animations;
+}
+
 // MergeSort Implementation
-export function mergeSort(arr, l, h) {
+function mergeSort(arr, l, h, animations, temp) {
     if (l < h) {
         let m = Math.floor((l + h) / 2);
-        mergeSort(arr, l, m);
-        mergeSort(arr, m + 1, h);
-        merge(arr, l, m, h);
+        mergeSort(temp, l, m, animations, arr);
+        mergeSort(temp, m + 1, h, animations, arr);
+        merge(arr, l, m, h, animations, temp);
     }
-    return arr;
 }
 
 // Merge Implementation
-function merge(arr, l, m, h) {
-    let i = 0;
-    let j = 0;
+function merge(arr, l, m, h, animations, temp) {
+    let i = l;
+    let j = m+1;
     let k = l;
-    let n1 = m - l + 1;
-    let n2 = h - m;
-    let temp1 = new Array(n1);
-    let temp2 = new Array(n2);
 
-    for (let i = 0; i < n1; i++) {
-        temp1[i] = arr[l + i];
-    }
-
-    for (let i = 0; i < n2; i++) {
-        temp2[i] = arr[m + 1 + i];
-    }
-
-    while (i < n1 && j < n2) {
-        if (temp1[i] <= temp2[j]) {
-            arr[k] = temp1[i];
+    while (i <= m && j <= h) {
+        animations.push([i, j]);
+        animations.push([i, j]);
+        if (temp[i] <= temp[j]) {
+            animations.push([k, temp[i]]);
+            arr[k] = temp[i];
             i++;
         } else {
-            arr[k] = temp2[j];
+            animations.push([k, temp[j]]);
+            arr[k] = temp[j];
             j++;
         }
         k++;
     }
 
-    while (i < n1) {
-        arr[k] = temp1[i];
+    while (i <= m) {
+        animations.push([i, i]);
+        animations.push([i, i]);
+        animations.push([k, temp[i]]);
+        arr[k] = temp[i];
         i++;
         k++;
     }
 
-    while (j < n2) {
-        arr[k] = temp2[j];
+    while (j <= h) {
+        animations.push([i, i]);
+        animations.push([i, i]);
+        animations.push([k, temp[j]]);
+        arr[k] = temp[j];
         j++;
         k++;
     }

@@ -6,6 +6,10 @@
 
 .array-bar {
     width: 2px;
-    background-color: turquoise;
+    background-color: aqua;
     margin: 0 1px;
+}
+
+body {
+    background-color: #2c3e50;
 }
