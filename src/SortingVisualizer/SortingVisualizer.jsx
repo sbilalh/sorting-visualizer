@@ -84,7 +84,7 @@ export class SortingVisualizer extends React.Component {
                 const arrayBar = document.getElementsByClassName('array-bar');
                 arrayBar[i].style.backgroundColor = PRIMARY_COLOR;
             }
-        }, buffer * animations.length * ANIMATION_SPEED_MS);
+        }, buffer * buffer * animations.length * ANIMATION_SPEED_MS);
     }
 
     // Gets sorted animation array from heap sort function and animates DOM elements
