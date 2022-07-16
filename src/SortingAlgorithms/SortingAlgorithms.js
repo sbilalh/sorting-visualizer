@@ -64,3 +64,19 @@ function merge(arr, l, m, h, animations, temp) {
 // TODO: Quick Sort
 
 // TODO: Bubble Sort
+export function getBubbleSortAnimations(array) {
+    const animations = [];
+    for (let i = 0; i < array.length - 1; i++) {
+        for (let j = 0; j < array.length - 1 - i; j++) {
+            if (array[j] > array[j+1]) {
+                animations.push([j, j+1, 0, 0, 0]);
+                animations.push([j, j+1, 0]);
+                animations.push([j, array[j+1], j+1, array[j]]);
+                let temp = array[j];
+                array[j] = array[j+1];
+                array[j+1] = temp;
+            }
+        }
+    }
+    return animations;
+}
