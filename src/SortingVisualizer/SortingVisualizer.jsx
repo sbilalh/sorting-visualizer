@@ -1,6 +1,6 @@
 import React from 'react';
 import './SortingVisualizer.css';
-import { getMergeSortAnimations, getBubbleSortAnimations } from '../SortingAlgorithms/SortingAlgorithms.js';
+import { getMergeSortAnimations, getBubbleSortAnimations, heapSort } from '../SortingAlgorithms/SortingAlgorithms.js';
 
 // Constant for animation speed
 const ANIMATION_SPEED_MS = 3;
@@ -140,18 +140,18 @@ export class SortingVisualizer extends React.Component {
     }
 
     // Testing method for sorting algorithms
-    /* testSortingAlgorithms() {
+    testSortingAlgorithms() {
         for (let i = 0; i < 100; i++) {
             const array = [];
             const length = randomIntFromInterval(1, 1000);
             for (let i = 0; i < length; i++) {
                 array.push(randomIntFromInterval(-1000, 1000));
             }
-            const javaScriptSortedArray = array.slice().sort((a, b) => a - b);
-            const bubbleSortedArray = bubbleSort(array.slice(), 0, array.slice().length - 1);
-            console.log(arraysAreEqual(javaScriptSortedArray, bubbleSortedArray));
+            const javaScriptSortedArray = array.slice().sort(function(a, b) {return a - b});
+            const heapSortedArray = heapSort(array.slice());
+            console.log(arraysAreEqual(javaScriptSortedArray, heapSortedArray));
         }
-    } */
+    } 
 
     // Rendering all elements
     render() {
@@ -193,6 +193,9 @@ function arraysAreEqual(arrayOne, arrayTwo) {
     if (arrayOne.length !== arrayTwo.length) return false;
     for (let i = 0; i < arrayOne.length; i++) {
         if (arrayOne[i] !== arrayTwo[i]) {
+            console.log(arrayOne.length + ", " + arrayOne[i] + ", " + arrayTwo[i]);
+            console.log(arrayOne);
+            console.log(arrayTwo);
             return false;
         }
     }
