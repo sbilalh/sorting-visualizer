@@ -88,7 +88,7 @@ class MinHeap {
         this.heap.push(item);
         let index = this.heap.length - 1;
         let parent = this.parentIndex(index);
-        while (this.heap[parent] && this.heap[parent] < this.heap[index]) {
+        while (this.heap[parent] < this.heap[index]) {
             this.swap(parent, index);
             index = this.parentIndex(index);
             parent = this.parentIndex(index);
@@ -101,9 +101,9 @@ class MinHeap {
         let index = 0;
         let leftChild = this.leftChildIndex(index);
         let rightChild = this.rightChildIndex(index);
-        while (this.heap[leftChild] && this.heap[leftChild] > this.heap[index] || this.heap[rightChild] > this.heap[index]) {
+        while (this.heap[leftChild] > this.heap[index] || this.heap[rightChild] > this.heap[index]) {
             let max = leftChild;
-            if (this.heap[rightChild] && this.heap[rightChild] > this.heap[max]) {
+            if (this.heap[rightChild] > this.heap[max]) {
                 max = rightChild
             }
             this.swap(max, index);
