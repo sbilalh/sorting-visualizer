@@ -84,18 +84,19 @@ class MinHeap {
         this.heap[b] = temp;
     }
 
-    insert(item) {
+    insert(item, animations) {
         this.heap.push(item);
         let index = this.heap.length - 1;
         let parent = this.parentIndex(index);
         while (this.heap[parent] < this.heap[index]) {
             this.swap(parent, index);
+            animations.push([parent, index]);
             index = this.parentIndex(index);
             parent = this.parentIndex(index);
         }
     }
 
-    delete() {
+    delete(animations) {
         let item = this.heap.shift();
         this.heap.unshift(this.heap.pop());
         let index = 0;
@@ -107,27 +108,28 @@ class MinHeap {
                 max = rightChild
             }
             this.swap(max, index);
+            animations.push([max, index, 0]);
             index = max;
             leftChild = this.leftChildIndex(max);
             rightChild = this.rightChildIndex(max);
         }
-        return item;
+        animations.push([item]);
     }
 }
 
 // Heap Sort Implementation
-export function heapSort(arr) {
-    let sorted = [];
+export function getHeapSortAnimations(arr) {
+    let animations = [];
     let heap = new MinHeap();
 
     for (let i = 0; i < arr.length; i++) {
-        heap.insert(arr[i]);
+        heap.insert(arr[i], animations);
     }
 
     for (let i = arr.length - 1; i >= 0; i--) {
-        sorted[i] = heap.delete();
+        heap.delete(animations);
     }
-    return sorted;
+    return animations;
 }
 
 // TODO: Quick Sort
