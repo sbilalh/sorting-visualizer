@@ -89,15 +89,18 @@ class MinHeap {
         let index = this.heap.length - 1;
         let parent = this.parentIndex(index);
         while (this.heap[parent] < this.heap[index]) {
-            this.swap(parent, index);
             animations.push([parent, index]);
+            animations.push([parent, index, 0]);
+            animations.push([parent,  this.heap[parent], index, this.heap[index]]);
+            this.swap(parent, index);
             index = this.parentIndex(index);
             parent = this.parentIndex(index);
         }
     }
 
     delete(animations) {
-        let item = this.heap.shift();
+        animations.push([this.heap.length - 1, this.heap[0], 0, this.heap[this.heap.length - 1]]);
+        this.heap.shift();
         this.heap.unshift(this.heap.pop());
         let index = 0;
         let leftChild = this.leftChildIndex(index);
@@ -107,13 +110,14 @@ class MinHeap {
             if (this.heap[rightChild] > this.heap[max]) {
                 max = rightChild
             }
-            this.swap(max, index);
+            animations.push([max, index]);
             animations.push([max, index, 0]);
+            animations.push([max, this.heap[max], index, this.heap[index]]);
+            this.swap(max, index);
             index = max;
             leftChild = this.leftChildIndex(max);
             rightChild = this.rightChildIndex(max);
         }
-        animations.push([item]);
     }
 }
 
