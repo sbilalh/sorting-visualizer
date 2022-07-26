@@ -91,7 +91,7 @@ class MinHeap {
         while (this.heap[parent] < this.heap[index]) {
             animations.push([parent, index]);
             animations.push([parent, index, 0]);
-            animations.push([parent,  this.heap[parent], index, this.heap[index]]);
+            animations.push([parent, this.heap[index], index, this.heap[parent]]);
             this.swap(parent, index);
             index = this.parentIndex(index);
             parent = this.parentIndex(index);
@@ -112,7 +112,7 @@ class MinHeap {
             }
             animations.push([max, index]);
             animations.push([max, index, 0]);
-            animations.push([max, this.heap[max], index, this.heap[index]]);
+            animations.push([max, this.heap[index], index, this.heap[max]]);
             this.swap(max, index);
             index = max;
             leftChild = this.leftChildIndex(max);
@@ -121,7 +121,7 @@ class MinHeap {
     }
 }
 
-// Heap Sort Implementation
+// Heap Sort Animations
 export function getHeapSortAnimations(arr) {
     let animations = [];
     let heap = new MinHeap();
@@ -136,9 +136,41 @@ export function getHeapSortAnimations(arr) {
     return animations;
 }
 
-// TODO: Quick Sort
+// Quick Sort Partition
+function partition(arr, low, high, animations) {
+    let pivot = arr[high];
+    let i = (low - 1);
+    for (let j = low; j <= high - 1; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            animations.push([i, j]);
+            animations.push([i, j, 0]);
+            animations.push([i, arr[j], j, arr[i]]);
+            let temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    animations.push([i + 1, high]);
+    animations.push([i + 1, high, 0]);
+    animations.push([i + 1, arr[high], high, arr[i + 1]]);
+    let temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+    return (i + 1);
+}
 
-// Bubble Sort
+// Quick Sort Implementation
+export function getQuickSortAnimations(arr, low, high, animations) {
+    if (low < high) {
+        let pi = partition(arr, low, high, animations);
+        getQuickSortAnimations(arr, low, pi - 1, animations);
+        getQuickSortAnimations(arr, pi + 1, high, animations);
+    }
+    return animations;
+}
+
+// Bubble Sort Animations
 export function getBubbleSortAnimations(array) {
     const animations = [];
     for (let i = 0; i < array.length - 1; i++) {
